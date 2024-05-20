@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro JS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 90%;
+            height: 90%;
+        }
+
+        form {
+            width: 300px;
+            margin: 200px auto;
+            text-align: center;
+        }
+
+        input {
+            display: block;
+            margin: 10px;
+            width: 250px;
+            height: 30px;
+        }
+
+        #output {
+            margin-top: 10px;
+            width: 300px;
+            height: 300px;
+            text-align: left;
+        }
+
+        #output img {
+            display: block;
+            margin-top: 10px;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h3>CADASTRO PARA CRACHÁ - FEIRA MODALGR</h3>
+        <input type="text" placeholder="Nome e Sobrenome" id="fullname">
+        <h1>Crachá:</h1>
+        <div id="output"></div>
+        <button type="button" id="cadastrarcracha">Gerar Crachá</button>
+    </form>
+
+    <script>
+        document.getElementById('cadastrarcracha').addEventListener('click', function() {
+            var nome = document.getElementById('fullname').value;
+
+            const conectores = ['de', 'da', 'das', 'do', 'dos', 'e'];
+            let nomes = nome.split(' ');
+            let ultimoNome = nomes.pop();
+            let iniciais = [];
+
+            for (let i = 0; i < nomes.length; i++) {
+                let palavra = nomes[i].toLowerCase();
+                if (!conectores.includes(palavra)) {
+                    iniciais.push(nomes[i].charAt(0).toUpperCase() + '.');
+                }
+            }
+
+            let nomeFormatado = `${ultimoNome.toUpperCase()}, ${iniciais.join(' ')}`;
+
+            var imgElement = document.createElement('img');
+            imgElement.src = 'ModalLogo.Jpeg';
+            imgElement.alt = 'modallogo';
+
+            var outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+
+            var nomeElement = document.createElement('div');
+            nomeElement.textContent = nomeFormatado;
+
+            outputDiv.appendChild(imgElement);
+            outputDiv.appendChild(nomeElement);
+        });
+    </script>
+</body>
+</html>
